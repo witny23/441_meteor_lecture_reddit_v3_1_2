@@ -14,15 +14,15 @@ Meteor.publish("user_posts_collection", function() {
 
 Meteor.startup(async function(){
     // await ensures each insertAsync() completes before moving to the next line.
-    await UP_Collection_Access.insertAsync({
-      topic: 'dog',
-      votes: 9,
-    });
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'dog',
+    //   votes: 9,
+    // });
     // await ensures each insertAsync() completes before moving to the next line.
-    await UP_Collection_Access.insertAsync({
-      topic: 'bird',
-      votes: 93,
-    });
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'bird',
+    //   votes: 93,
+    // });
 
   console.log(await UP_Collection_Access.find().fetch());
   // await ensures each insertAsync() completes before moving to the next line.
