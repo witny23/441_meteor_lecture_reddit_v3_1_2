@@ -7,12 +7,12 @@ import {UP_Collection_Access} from './../imports/api/user_posts.js';
 
 
 Meteor.startup(function(){
-    UP_Collection_Access.insert({
+    UP_Collection_Access.insertAsync({
       topic: 'dog',
       votes: 9,
     });
 
-    UP_Collection_Access.insert({
+    UP_Collection_Access.insertAsync({
       topic: 'bird',
       votes: 93,
     });
