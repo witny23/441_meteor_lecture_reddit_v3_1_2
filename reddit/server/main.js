@@ -11,6 +11,7 @@ Meteor.publish("user_posts_collection", function() {
   return UP_Collection_Access.find();
 });
 
+
 Meteor.startup(async function(){
     // await ensures each insertAsync() completes before moving to the next line.
     await UP_Collection_Access.insertAsync({
@@ -29,4 +30,15 @@ Meteor.startup(async function(){
   // .fetch() is a pointer to some documents in the DB
   // to get an array of the documents you use .fetch()
 
+});
+
+
+// Allow all inserts from the client (Security risk)
+// Anyone can open the browser console and run:
+// UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
+// this is in place for the purpose of the upcoming challenge
+UP_Collection_Access.allow({
+  insert(userId, doc) {
+    return true; // Allows all clients to insert data
+  },
 });
