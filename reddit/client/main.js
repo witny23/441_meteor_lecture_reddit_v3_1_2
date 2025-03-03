@@ -32,16 +32,16 @@ const processFormDataFunction = function(event){
   // console.log(newTopic);
   if (newTopic){
     event.target.formInputNameAttribute.value = ''; // clear input box
-
+    UP_Collection_Access.insertAsync({
+      topic: newTopic,
+      votes: 0,
+    });
   };
 };
 
 Meteor.startup(async function () {
   // await ensures each insertAsync() completes before moving to the next line.
-  await UP_Collection_Access.insertAsync({
-    topic: 'kids',
-    votes: 0,
-  });
+
   // Tracker tracks queries and reruns code when queries change
   Tracker.autorun(function(){
     const allPostsInDB = UP_Collection_Access.find().fetch();
