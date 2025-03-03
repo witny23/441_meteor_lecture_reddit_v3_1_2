@@ -5,14 +5,20 @@ import {Meteor} from 'meteor/meteor';
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
 // this gives us access to the UP_Collection_Access object so we can interact with the DB
 
+// Meteor.publish() is a server-side function that controls which data is sent to the client. 
+// It allows the client to subscribe to specific datasets from the server.
+Meteor.publish("user_posts_collection", function() {
+  return UP_Collection_Access.find();
+});
 
 Meteor.startup(async function(){
-    UP_Collection_Access.insertAsync({
+    // await ensures each insertAsync() completes before moving to the next line.
+    await UP_Collection_Access.insertAsync({
       topic: 'dog',
       votes: 9,
     });
-
-    UP_Collection_Access.insertAsync({
+    // await ensures each insertAsync() completes before moving to the next line.
+    await UP_Collection_Access.insertAsync({
       topic: 'bird',
       votes: 93,
     });
