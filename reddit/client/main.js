@@ -19,8 +19,9 @@ const renderPosts = function (passed_posts) {
   return formattedPosts;
 };
 
-Meteor.startup(function () {
-  UP_Collection_Access.insert({
+Meteor.startup(async function () {
+  // await ensures each insertAsync() completes before moving to the next line.
+  await UP_Collection_Access.insertAsync({
     topic: 'kids',
     votes: 5,
   });
