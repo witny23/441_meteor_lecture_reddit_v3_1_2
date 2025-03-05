@@ -11,34 +11,23 @@ Meteor.publish("user_posts_collection", function() {
   return UP_Collection_Access.find();
 });
 
-
+// promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
+// async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
 Meteor.startup(async function(){
-    // await ensures each insertAsync() completes before moving to the next line.
-    // await UP_Collection_Access.insertAsync({
-    //   topic: 'dog',
-    //   votes: 9,
-    // });
-    // await ensures each insertAsync() completes before moving to the next line.
-    // await UP_Collection_Access.insertAsync({
-    //   topic: 'bird',
-    //   votes: 93,
-    // });
+    // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
+    await UP_Collection_Access.insertAsync({
+      topic: 'dog',
+      votes: 9,
+    });
+    await UP_Collection_Access.insertAsync({
+      topic: 'bird',
+      votes: 93,
+    });
 
   console.log(await UP_Collection_Access.find().fetch());
-  // await ensures each insertAsync() completes before moving to the next line.
+  // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
   // .find() returns everything
   // .fetch() is a pointer to some documents in the DB
   // to get an array of the documents you use .fetch()
 
-});
-
-
-// Allow all inserts from the client (Security risk)
-// Anyone can open the browser console and run:
-// UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
-// this is in place for the purpose of the upcoming challenge
-UP_Collection_Access.allow({
-  insert(userId, doc) {
-    return true; // Allows all clients to insert data
-  },
 });

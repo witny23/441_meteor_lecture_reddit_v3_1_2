@@ -9,6 +9,22 @@ import {UP_Collection_Access} from './../imports/api/user_posts.js';
 Meteor.subscribe("user_posts_collection");
 
 
+// the following is an empty array b/c DDP has not synched up with the two DB
+console.log('Postings 1', UP_Collection_Access.find().fetch());
+
+// hack fix - set a timeout
+setTimeout(function(){
+  console.log('Posting 2', UP_Collection_Access.find().fetch());
+}, 1000);
+// this is a bad solution because it only fires once
+// if the data updates we wont see the update
+
+
+// it is better to use a built in meteor function called Tracker
+// Tracker tracks queries and reruns code when queries change
+Tracker.autorun(function(){
+  console.log('Posting 3', UP_Collection_Access.find().fetch());
+});
 
 const renderPosts = function (passed_posts) {
   console.log(passed_posts);
@@ -19,47 +35,31 @@ const renderPosts = function (passed_posts) {
   return formattedPosts;
 };
 
-const processFormDataFunction = function(event){
-  // the event (sometimes e) parameter is a default event handler object that is
-  // passed in by the browser when an event occurs
-  // this is an important argument becuase it allows us to access the topic name
-  // which we need in order to insert a new topic into the db
-  event.preventDefault() // stops the page from reloading
-  let newTopic = event.target.formInputNameAttribute.value;
-  // event.target grabs the target element - the form in this case which lets
-  // us grab any of its inputs by referencing it by name (.formInputNameAttribute)
-  // .value gets us the value
-  // console.log(newTopic);
-  if (newTopic){
-    event.target.formInputNameAttribute.value = ''; // clear input box
-    UP_Collection_Access.insertAsync({
-      topic: newTopic,
-      votes: 0,
-    });
-  };
-};
+Meteor.startup(function () {
+  const posts =[{
+        _id: '01',
+        topic: 'cats',
+        votes: 5,
+      }, {
+        _id: '02',
+        topic: 'dogs',
+        votes: 2,
+      }, {
+        _id: '03',
+        topic: 'birds',
+        votes: 11,
+      }
+  ];
+  let title = '441 reddit';
+  let jsx = (
+    <div>
+      <h1>{title}</h1>
 
-Meteor.startup(async function () {
-  // await ensures each insertAsync() completes before moving to the next line.
+      {/* renderPosts('hi') */}
+      {renderPosts(posts)}
+    </div>
+  );
 
-  // Tracker tracks queries and reruns code when queries change
-  Tracker.autorun(function(){
-    const allPostsInDB = UP_Collection_Access.find().fetch();
-    let title = '441 reddit';
-    let jsx = (
-      <div>
-        <h1>{title}</h1>
-        <form onSubmit={processFormDataFunction}>
-          <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
-          <button>Add Topic</button>
-        </form>
-        {renderPosts(allPostsInDB)}
-      </div>
-    );
-
-
-    ReactDOM.render(jsx, document.getElementById('content'));
-
-  });
+  ReactDOM.render(jsx, document.getElementById('content'));
 
 });
