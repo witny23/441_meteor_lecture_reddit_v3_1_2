@@ -13,7 +13,7 @@ const renderPosts = function (passed_posts) {
   return formattedPosts;
 };
 
-Meteor.startup(async function () {
+Meteor.startup(async function () { // async function: Marks a function as asynchronous. see server/main.js for more info 
   const posts =[{
         _id: '01',
         topic: 'cats',
