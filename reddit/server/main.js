@@ -14,18 +14,36 @@ Meteor.publish("user_posts_collection", function() {
 // promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
 Meteor.startup(async function(){
+    // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'dog',
+    //   votes: 9,
+    // });
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'bird',
+    //   votes: 93,
+    // });
 
-  let numbers = [3, 12, 54, 17];
-  // challenge 1 use ES5 version to print everything in the array +1
-  let newNumbers = numbers.map(function(number){
-    return number +1;
+  console.log(await UP_Collection_Access.find().fetch());
+  // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
+  // .find() returns everything
+  // .fetch() is a pointer to some documents in the DB
+  // to get an array of the documents you use .fetch()
+
+
+
+
+
+
+  // the following is in place for future work / challenges. 
+  // It allows the client to insert data directly into the mongoDB
+  // Allowing all inserts from the client is a Security risk
+  // Anyone can open the browser console and run:
+  // UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
+
+  UP_Collection_Access.allow({
+    insert(userId, doc) {
+    return true; // Allows all clients to insert data
+    },
   });
-  console.log(newNumbers);
-
-
-  // challenge 2 create an arow function to do the same thing
-
-  let newNumbers2 = numbers.map((number) => number +1);
-  console.log(newNumbers2);
-
 });
