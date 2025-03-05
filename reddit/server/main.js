@@ -15,14 +15,14 @@ Meteor.publish("user_posts_collection", function() {
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
 Meteor.startup(async function(){
     // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
-    await UP_Collection_Access.insertAsync({
-      topic: 'dog',
-      votes: 9,
-    });
-    await UP_Collection_Access.insertAsync({
-      topic: 'bird',
-      votes: 93,
-    });
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'dog',
+    //   votes: 9,
+    // });
+    // await UP_Collection_Access.insertAsync({
+    //   topic: 'bird',
+    //   votes: 93,
+    // });
 
   console.log(await UP_Collection_Access.find().fetch());
   // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
