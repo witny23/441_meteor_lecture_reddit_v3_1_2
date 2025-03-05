@@ -26,17 +26,20 @@ Meteor.startup(async () =>{
 
 
 
-  // The following allows the client to insert and remove data directly into/from the mongoDB
+  // The following allows the client to insert, remove, and update data from the collection
   // Allowing all inserts from the client is a Security risk
   // Anyone can open the browser console and run:
   // UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
 
   UP_Collection_Access.allow({
     insert(userId, doc) {
-      return true; // Allows all clients to insert data (you can restrict this to authenticated users if necessary)
+      return true; // Anyone can insert
     },
     remove(userId, doc) {
-      return true; // Allow only the user who created the post to remove it
+      return true; // Anyone can remove
+    },
+    update(userId, doc, fieldNames, modifier) {
+      return true; // Anyone can update
     },
   });
 });
