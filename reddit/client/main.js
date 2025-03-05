@@ -43,11 +43,7 @@ const processFormDataFunction = function(event){
 
 
 Meteor.startup(async function () { // async function: Marks a function as asynchronous. see server/main.js for more info 
-  
-  await UP_Collection_Access.insertAsync({
-    topic: 'kids',
-    votes: 0,
-  });  
+
   
   // Tracker tracks queries and reruns code when queries change
   Tracker.autorun(function(){
