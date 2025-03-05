@@ -11,7 +11,7 @@ Meteor.subscribe("user_posts_collection");
 
 
 const renderPosts = function (passed_posts) {
-  console.log(passed_posts);
+  // console.log(passed_posts);
   let formattedPosts = passed_posts.map(function(post){
     return <p key={post._id}>{post.topic} have {post.votes} vote[s]</p>;
   });
