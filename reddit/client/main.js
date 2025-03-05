@@ -34,6 +34,10 @@ const processFormDataFunction = function(event){
   if (newTopic){
     event.target.formInputNameAttribute.value = ''; // clear input box
 
+    UP_Collection_Access.insertAsync({  // no await is okay because okay because this function is triggered by a form submission, and the main goal is to insert the data into the collection, but you don't necessarily need to block the rest of the form processing.
+      topic: newTopic,
+      votes: 0,
+    });
   };
 };
 
