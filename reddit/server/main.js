@@ -30,4 +30,20 @@ Meteor.startup(async function(){
   // .fetch() is a pointer to some documents in the DB
   // to get an array of the documents you use .fetch()
 
+
+
+
+
+
+  // the following is in place for future work / challenges. 
+  // It allows the client to insert data directly into the mongoDB
+  // Allowing all inserts from the client is a Security risk
+  // Anyone can open the browser console and run:
+  // UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
+
+  UP_Collection_Access.allow({
+    insert(userId, doc) {
+    return true; // Allows all clients to insert data
+    },
+  });
 });
