@@ -34,16 +34,17 @@ const processFormDataFunction = function(event){
   if (newTopic){
     event.target.formInputNameAttribute.value = ''; // clear input box
 
+    UP_Collection_Access.insert({  
+      topic: newTopic,
+      votes: 0,
+    });
   };
 };
 
 Meteor.startup(function () { 
-  UP_Collection_Access.insert({
-    topic: 'kids',
-    votes: 0,
-  });  
-  // Tracker tracks queries and reruns code when queries change
-  Tracker.autorun(function(){
+
+   // Tracker tracks queries and reruns code when queries change
+   Tracker.autorun(function(){
     const allPostsInDB = UP_Collection_Access.find().fetch();
     let title = '441 reddit';
     let jsx = (
@@ -62,4 +63,3 @@ Meteor.startup(function () {
   });
 
 });
- 
