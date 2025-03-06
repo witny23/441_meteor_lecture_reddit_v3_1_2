@@ -5,15 +5,26 @@ import {Meteor} from 'meteor/meteor';
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
 // this gives us access to the UP_Collection_Access object so we can interact with the DB
 
-// Meteor.publish() is a server-side function that controls which data is sent to the client. 
-// It allows the client to subscribe to specific datasets from the server.
-Meteor.publish("user_posts_collection", function() {
-  return UP_Collection_Access.find();
-});
 
 // promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
-Meteor.startup(async () =>{
+Meteor.startup(async function(){
+    // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
+    UP_Collection_Access.insertAsync({
+      topic: 'dog',
+      votes: 9,
+    });
+    UP_Collection_Access.insertAsync({
+      topic: 'bird',
+      votes: 93,
+    });
+
+    console.log(await UP_Collection_Access.find().fetch());
+    // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
+    // await ensures each insertAsync() completes before moving to the next line.
+    // .find() returns everything
+    // .fetch() is a pointer to some documents in the DB
+    // to get an array of the documents you use .fetch()
 
 
 
@@ -23,15 +34,12 @@ Meteor.startup(async () =>{
 
 
 
-
-
-
-  // The following allows the client to insert, remove, and update data from the collection
-  // Allowing all inserts from the client is a Security risk
-  // Anyone can open the browser console and run:
-  // UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
-
-  UP_Collection_Access.allow({
+  
+  // The following method allows the client to insert, remove, and update data from the collection.
+  // **WARNING**: Allowing all operations from the client is a security risk, as any user can modify the data.
+  // For example, someone can run: UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
+  // while not be used directly in this video / lesson, it will be used in the future
+  const allowAllOperations = {
     insert(userId, doc) {
       return true; // Anyone can insert
     },
@@ -41,5 +49,8 @@ Meteor.startup(async () =>{
     update(userId, doc, fieldNames, modifier) {
       return true; // Anyone can update
     },
-  });
+  };
+
+  // Assign the allowAllOperations rules to both collections.
+  UP_Collection_Access.allow(allowAllOperations);
 });
