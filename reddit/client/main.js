@@ -19,19 +19,41 @@ const renderPosts = function (passed_posts) {
   return formattedPosts;
 };
 
+
+const processFormDataFunction = function(event){
+  // the event (sometimes e) parameter is a default event handler object that is
+  // passed in by the browser when an event occurs
+  // this is an important argument becuase it allows us to access the topic name
+  // which we need in order to insert a new topic into the db
+  event.preventDefault() // stops the page from reloading
+  let newTopic = event.target.formInputNameAttribute.value;
+  // event.target grabs the target element - the form in this case which lets
+  // us grab any of its inputs by referencing it by name (.formInputNameAttribute)
+  // .value gets us the value
+  // console.log(newTopic);
+  if (newTopic){
+    event.target.formInputNameAttribute.value = ''; // clear input box
+
+  };
+};
+
 Meteor.startup(function () { 
   UP_Collection_Access.insert({
     topic: 'kids',
-    votes: 5,
+    votes: 0,
   });  
   // Tracker tracks queries and reruns code when queries change
   Tracker.autorun(function(){
-    const posts = UP_Collection_Access.find().fetch();
+    const allPostsInDB = UP_Collection_Access.find().fetch();
     let title = '441 reddit';
     let jsx = (
       <div>
         <h1>{title}</h1>
-        {renderPosts(posts)}
+        <form onSubmit={processFormDataFunction}>
+          <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
+          <button>Add Topic</button>
+        </form>
+        {renderPosts(allPostsInDB)}
       </div>
     );
 
@@ -40,5 +62,4 @@ Meteor.startup(function () {
   });
 
 });
-
-  
+ 

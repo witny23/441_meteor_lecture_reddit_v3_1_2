@@ -15,14 +15,14 @@ Meteor.publish("user_posts_collection", function() {
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
 Meteor.startup(async function(){
     // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
-    UP_Collection_Access.insertAsync({
-      topic: 'dog',
-      votes: 9,
-    });
-    UP_Collection_Access.insertAsync({
-      topic: 'bird',
-      votes: 93,
-    });
+    // UP_Collection_Access.insertAsync({
+    //   topic: 'dog',
+    //   votes: 9,
+    // });
+    // UP_Collection_Access.insertAsync({
+    //   topic: 'bird',
+    //   votes: 93,
+    // });
 
     console.log(await UP_Collection_Access.find().fetch());
     // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
@@ -43,7 +43,7 @@ Meteor.startup(async function(){
   // The following method allows the client to insert, remove, and update data from the collection.
   // **WARNING**: Allowing all operations from the client is a security risk, as any user can modify the data.
   // For example, someone can run: UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
-  // while not be used directly in this video / lesson, it will be used in the future
+
   const allowAllOperations = {
     insert(userId, doc) {
       return true; // Anyone can insert
