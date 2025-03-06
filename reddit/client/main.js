@@ -20,6 +20,10 @@ const renderPosts = function (passed_posts) {
 };
 
 Meteor.startup(function () { 
+  UP_Collection_Access.insert({
+    topic: 'kids',
+    votes: 5,
+  });  
   // Tracker tracks queries and reruns code when queries change
   Tracker.autorun(function(){
     const posts = UP_Collection_Access.find().fetch();
