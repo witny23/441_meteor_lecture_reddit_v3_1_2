@@ -5,6 +5,11 @@ import {Meteor} from 'meteor/meteor';
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
 // this gives us access to the UP_Collection_Access object so we can interact with the DB
 
+// Meteor.publish() is used on the server side to specify which data is available to the client. 
+// This publication allows the client to subscribe to the 'user_posts_collection' data.
+Meteor.publish("user_posts_collection", function() {
+  return UP_Collection_Access.find();
+});
 
 // promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
