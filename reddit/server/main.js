@@ -14,23 +14,50 @@ Meteor.publish("user_posts_collection", function() {
 // promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
 Meteor.startup(async function(){
-    // insertAsync() is an asynchronous function, and await ensures that it completes before continuing to the next line of code
-    // UP_Collection_Access.insertAsync({
-    //   topic: 'dog',
-    //   votes: 9,
-    // });
-    // UP_Collection_Access.insertAsync({
-    //   topic: 'bird',
-    //   votes: 93,
-    // });
+    
+  // ES5 function
+  let square = function(x){   // functions can be anonymous like this one
+    return x*x;               // we take the anonymous function and store it on
+  }                           // square variable
+  console.log(square(10));
 
-    console.log(await UP_Collection_Access.find().fetch());
-    // 'await' is used here to wait for the asynchronous 'find().fetch()' operation to complete before logging the collection data.
-    // await ensures each insertAsync() completes before moving to the next line.
-    // .find() returns everything
-    // .fetch() is a pointer to some documents in the DB
-    // to get an array of the documents you use .fetch()
+  function squareNamed(x){return x*x}; // named function that produces same result
+  console.log(squareNamed(9));
 
+  // problem -  arrow functions do not support the named function syntax
+  //            all arrow functions are anonymous functions which means you must
+  //            use the let variable syntax
+
+  
+  let square2 = (x) => {  // don't need to state function
+    x = x+1
+    return x*x;   // this is known as statements syntax
+  }
+  console.log(square2(4));
+
+
+
+  let square3 = (x) => x*x; // this is known as expression syntax
+
+  console.log(square3(6));
+
+  // another example with an object
+  let user = {
+    name: 'newman',
+    sayHi: function (){ // this is an ES5 function
+        console.log(this.name);
+    }
+  };
+  user.sayHi();
+
+  // let user2 = {
+  //   name: 'newman',
+  //   sayHi:  () => { // this is an ES6 function
+  //       console.log(this.name); // this is undefined b/c arrow functions and
+  //   }                           // will not bind the this keyword
+  // };                // it is best not to use arrow functions for methods on
+  //                   // obects b/c it is most likely going to cause problems - wont work
+  // user2.sayHi();
 
 
 
