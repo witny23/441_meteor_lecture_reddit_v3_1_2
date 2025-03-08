@@ -10,45 +10,41 @@ Meteor.subscribe("user_posts_collection");
 
 
 
-const renderPosts =  (passed_posts) =>  {
-  let formattedPosts = passed_posts.map((post) => {
-    return (
-      <p key={post._id}>
-        {post.topic} have {post.votes} vote[s] {''/* single space before button hack */}
-        {/* below is a statement function */}
-        <button onClick={() => {  // anonymous arrow function
-          UP_Collection_Access.update({_id: post._id}, {$inc: {votes: 1}})
-        }}>+1</button>
-        <button onClick={() => {
-          UP_Collection_Access.update({_id: post._id}, {$inc: {votes: -1}})
-        }}>-1</button>
-        <button onClick={() => {
-          UP_Collection_Access.remove({_id: post._id})
-        }}>X</button>
-      </p>
-    );
+const renderPosts = function (passed_posts) {
+  // console.log(passed_posts);
+  let formattedPosts = passed_posts.map(function(post){
+    return <p key={post._id}>{post.topic} have {post.votes} vote[s]</p>;
   });
 
   return formattedPosts;
 };
 
-const processFormDataFunction = (event) => {
-  event.preventDefault()
+
+const processFormDataFunction = function(event){
+  // the event (sometimes e) parameter is a default event handler object that is
+  // passed in by the browser when an event occurs
+  // this is an important argument becuase it allows us to access the topic name
+  // which we need in order to insert a new topic into the db
+  event.preventDefault() // stops the page from reloading
   let newTopic = event.target.formInputNameAttribute.value;
+  // event.target grabs the target element - the form in this case which lets
+  // us grab any of its inputs by referencing it by name (.formInputNameAttribute)
+  // .value gets us the value
+  // console.log(newTopic);
   if (newTopic){
     event.target.formInputNameAttribute.value = ''; // clear input box
-    UP_Collection_Access.insert({
+
+    UP_Collection_Access.insert({  
       topic: newTopic,
       votes: 0,
     });
-
   };
 };
 
-Meteor.startup(() =>  {
+Meteor.startup(function () { 
 
-  // Tracker tracks queries and reruns code when queries change
-  Tracker.autorun(() => {
+   // Tracker tracks queries and reruns code when queries change
+   Tracker.autorun(function(){
     const allPostsInDB = UP_Collection_Access.find().fetch();
     let title = '441 reddit';
     let jsx = (
@@ -58,7 +54,6 @@ Meteor.startup(() =>  {
           <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
           <button>Add Topic</button>
         </form>
-
         {renderPosts(allPostsInDB)}
       </div>
     );
@@ -66,8 +61,5 @@ Meteor.startup(() =>  {
     ReactDOM.render(jsx, document.getElementById('content'));
 
   });
-
-
-
 
 });

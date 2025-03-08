@@ -1,86 +1,72 @@
 import {Meteor} from 'meteor/meteor';
+// Meteor import allows us access to Meteor.startup which waits for the server
+// to finish processing everything before the code inside of startup is run
+
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
+// this gives us access to the UP_Collection_Access object so we can interact with the DB
 
-
+// Meteor.publish() is used on the server side to specify which data is available to the client. 
+// This publication allows the client to subscribe to the 'user_posts_collection' data.
 Meteor.publish("user_posts_collection", function() {
   return UP_Collection_Access.find();
 });
 
-Meteor.startup(async () =>{
+// promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
+// async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
+Meteor.startup(function(){
     
-  // convention is to capitalize class names
-  class Person {
+  // ES5 function
+  let square = function(x){   // functions can be anonymous like this one
+    return x*x;               // we take the anonymous function and store it on
+  }                           // square variable
+  console.log(square(10));
 
+  function squareNamed(x){return x*x}; // named function that produces same result
+  console.log(squareNamed(9));
+
+  // problem -  arrow functions do not support the named function syntax
+  //            all arrow functions are anonymous functions which means you must
+  //            use the let variable syntax
+
+  
+  let square2 = (x) => {  // don't need to state function
+    x = x+1
+    return x*x;   // this is known as statements syntax
+  }
+  console.log(square2(4));
+
+
+
+  let square3 = (x) => x*x; // this is known as expression syntax
+
+  console.log(square3(6));
+
+  // another example with an object
+  let user = {
+    name: 'newman',
+    sayHi: function (){ // this is an ES5 function
+        console.log(this.name);
+    }
   };
+  user.sayHi();
 
-  let me = new Person();// this will create an empty object which is
-                        // expected because there is no data for this person
-  console.log(me);
-
-  class Person2 {
-    constructor(name){	// constructor called behind scenes
-      // so far the name is not stored on the Person instance. The following does that
-      this.name = name;
-      // every instance can have a different name and its stored in name
-    }
-  }	// no comma or semi – this is correct class definition for ES6
-
-  let me2 = new Person2('Michael');	// this is passes to the class's constructor function
-  console.log(me2);
-
-  class Person3 {
-    constructor(name = 'anonymous'){
-      this.name = name;
-    }
-  }
-  let me3 = new Person3(); // will print anonymous
-  let me3b = new Person3('passed name'); // will print anonymous
-  console.log(me3, me3b);
-
-  // the following sets up a method
-  class Person4 {
-    constructor(name = 'anonymous'){
-      this.name = name;
-    }
-    getGreeting(){  // return custom greeting using their name
-                    // will use ES6 template strings
-                    // these are designed to make it easy to inject values into a string
-                    // will use the back tick which is to the left of the 1 key
-                    // return 'hi, I am ' + this name'; will work but template strings are better
-      return `hi, I am ${this.name}`; // this is a js expression
-    }
-  }
-  let me4 = new Person4();  // will print anonymous
-
-  console.log(me4.getGreeting());
-
-  /*
-  Basics of class - define a class, define a constructor function which sets up
-                    initial data, define a set of custom methods available to the class
-                    THese methods can use the class's data
-  */
-
-  class Person5 {
-    constructor(name = 'anonymous', age = 0){
-      this.name = name;
-      this.age = age;
-    }
-    getGreeting(){
-      return `hi, I am ${this.name}`;
-    }
-    getPersonDesctiption(){
-      return `${this.name} is ${this.age}`;
-    }
-  }
-  let me5 = new Person5('newman', 23);
-
-  console.log(me5.getGreeting());
-  console.log(me5.getPersonDesctiption());                   
+  // let user2 = {
+  //   name: 'newman',
+  //   sayHi:  () => { // this is an ES6 function
+  //       console.log(this.name); // this is undefined b/c arrow functions and
+  //   }                           // will not bind the this keyword
+  // };                // it is best not to use arrow functions for methods on
+  //                   // obects b/c it is most likely going to cause problems - wont work
+  // user2.sayHi();
 
 
 
 
 
+
+
+
+  
   // The following method allows the client to insert, remove, and update data from the collection.
   // **WARNING**: Allowing all operations from the client is a security risk, as any user can modify the data.
   // For example, someone can run: UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
