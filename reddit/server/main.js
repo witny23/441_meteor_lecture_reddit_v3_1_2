@@ -13,20 +13,9 @@ Meteor.publish("user_posts_collection", function() {
 
 // promise: an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.
 // async function: Marks a function as asynchronous, allowing the use of 'await' inside it which will make the function "pause" until the promise is resolved or rejected.
-Meteor.startup(async function(){
+Meteor.startup(async () =>{
     
-  let numbers = [3, 12, 54, 17];
-  // challenge 1 use ES5 version to print everything in the array +1
-  let newNumbers = numbers.map(function(number){
-    return number +1;
-  });
-  console.log(newNumbers);
 
-
-  // challenge 2 create an arow function to do the same thing
-
-  let newNumbers2 = numbers.map((number) => number +1);
-  console.log(newNumbers2);
 
 
 
