@@ -76,6 +76,20 @@ Meteor.startup( () =>{
 
 
 
+  // challenge - customize the Person5 class
+  class Programmer extends Person5{
+    constructor (name, age, language = 'cobol'){
+      super(name, age);
+      this.language = language;
+    }
+    getGreeting(){
+      return `I am ${this.name}, I am ${this.age}, and I like to program in ${this.language}`
+    }
+  }
+  let me11 = new Programmer('whitney', 22, 'java');
+  console.log(me11.getGreeting());
+
+
   // The following method allows the client to insert, remove, and update data from the collection.
   // **WARNING**: Allowing all operations from the client is a security risk, as any user can modify the data.
   // For example, someone can run: UP_Collection_Access.insert({ topic: "Hacked!", votes: 9999 });
