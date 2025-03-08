@@ -11,9 +11,17 @@ Meteor.subscribe("user_posts_collection");
 
 
 const renderPosts =  (passed_posts) =>  {
-  // console.log(passed_posts);
+  //console.log(passed_posts);
   let formattedPosts = passed_posts.map((post) => {
-    return <p key={post._id}>{post.topic} have {post.votes} vote[s]</p>;
+    return (
+      <p key={post._id}>
+      {post.topic} have {post.votes} vote[s] {''/* single space before button hack */}
+      {/* below is a statement function */}
+      <button onClick={() => {  // nice anonymous arrow function
+        UP_Collection_Access.remove({_id: post._id})
+      }}>X</button>
+      </p>
+    );
   });
 
   return formattedPosts;
@@ -43,8 +51,8 @@ const processFormDataFunction = (event) => {
 
 Meteor.startup(() => { 
 
-   // Tracker tracks queries and reruns code when queries change
-   Tracker.autorun(() => {
+  // Tracker tracks queries and reruns code when queries change
+  Tracker.autorun(() => {
     const allPostsInDB = UP_Collection_Access.find().fetch();
     let title = '441 reddit';
     let jsx = (
