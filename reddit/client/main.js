@@ -53,7 +53,11 @@ Meteor.startup(() =>  {
     let title = '441 reddit';
     let jsx = (
       <div>
-        <TitleBar title={title}/>
+       {/*<TitleBar/>*/}
+       {/* <TitleBar title={title} /> title is now getting passed to our component*/}
+       {/* prop value can be anything - string, number, function */}
+       {/*<TitleBar/>  if there is no prop but a prop is required a warning will be thrown*/}
+       <TitleBar title={title} moderator='newman'/>
         <form onSubmit={processFormDataFunction}>
           <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
           <button>Add Topic</button>

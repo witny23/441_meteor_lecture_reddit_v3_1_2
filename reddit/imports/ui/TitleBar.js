@@ -18,6 +18,7 @@ export default class TitleBar extends React.Component{ // jsx requires uppercase
           modify <TitleBar title={title}/>
           in a manner necessary to have moderator's name show up under the title
         */}
+        <p>moderator: {this.props.moderator}</p>
       </div>
     );
   }
@@ -32,6 +33,7 @@ export default class TitleBar extends React.Component{ // jsx requires uppercase
 TitleBar.propTypes = {// this equals an object
   title: PropTypes.string.isRequired, //throws warnings in browser when undefined or not string
   //useful if you didn't create the component and if you are tying to use it wrong
+  moderator: PropTypes.string.isRequired,
 };
 /*
 // the following overrides the propTypes / required. so we wont be using it
