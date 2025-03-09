@@ -32,19 +32,6 @@ const renderPosts =  (passed_posts) =>  {
   return formattedPosts;
 };
 
-const processFormDataFunction = (event) => {
-  event.preventDefault()
-  let newTopic = event.target.formInputNameAttribute.value;
-  if (newTopic){
-    event.target.formInputNameAttribute.value = ''; // clear input box
-    UP_Collection_Access.insert({
-      topic: newTopic,
-      votes: 0,
-    });
-
-  };
-};
-
 Meteor.startup(() =>  {
 
   // Tracker tracks queries and reruns code when queries change
@@ -53,16 +40,8 @@ Meteor.startup(() =>  {
     let title = '441 reddit';
     let jsx = (
       <div>
-       {/*<TitleBar/>*/}
-       {/* <TitleBar title={title} /> title is now getting passed to our component*/}
-       {/* prop value can be anything - string, number, function */}
-       {/*<TitleBar/>  if there is no prop but a prop is required a warning will be thrown*/}
-       <TitleBar title={title} moderator='newman'/>
-        <form onSubmit={processFormDataFunction}>
-          <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
-          <button>Add Topic</button>
-        </form>
-        <AddTopics />
+        <TitleBar title={title} moderator='newman'/>
+        <AddTopics votes={10}/>
         {renderPosts(allPostsInDB)}
       </div>
     );
@@ -70,8 +49,5 @@ Meteor.startup(() =>  {
     ReactDOM.render(jsx, document.getElementById('content'));
 
   });
-
-
-
 
 });
