@@ -5,18 +5,10 @@ import {Meteor} from 'meteor/meteor'; // named export from Meteor
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
 import TitleBar from './../imports/ui/TitleBar.js';
 import AddTopics from './../imports/ui/AddTopics.js';
-import RenderPost from './../imports/ui/RenderPost.js';
+import TopicList from './../imports/ui/TopicList.js';
 
 Meteor.subscribe("user_posts_collection");
 
-
-const renderPosts =  (passed_posts) =>  {
-  let formattedPosts = passed_posts.map((post) => {
-    return <RenderPost key={post._id} post_prop_obj={post}/>
-  });
-
-  return formattedPosts;
-};
 
 Meteor.startup(() =>  {
 
@@ -28,7 +20,7 @@ Meteor.startup(() =>  {
       <div>
         <TitleBar title={title} moderator='newman'/>
         <AddTopics />
-        {renderPosts(allPostsInDB)}
+        <TopicList passed_posts={allPostsInDB}/>
       </div>
     );
 
