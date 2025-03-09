@@ -5,9 +5,9 @@ import {Meteor} from 'meteor/meteor'; // named export from Meteor
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
 import TitleBar from './../imports/ui/TitleBar.js';
 import AddTopics from './../imports/ui/AddTopics.js';
+import RenderPost from './../imports/ui/RenderPost.js';
 
 Meteor.subscribe("user_posts_collection");
-
 
 
 const renderPosts =  (passed_posts) =>  {
@@ -42,7 +42,7 @@ Meteor.startup(() =>  {
     let jsx = (
       <div>
         <TitleBar title={title} moderator='newman'/>
-        <AddTopics votes={10}/>
+        <AddTopics />
         {renderPosts(allPostsInDB)}
       </div>
     );
@@ -50,5 +50,5 @@ Meteor.startup(() =>  {
     ReactDOM.render(jsx, document.getElementById('content'));
 
   });
-
+  
 });

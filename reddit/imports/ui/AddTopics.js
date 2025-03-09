@@ -11,7 +11,7 @@ export default class AddTopics extends React.Component{
       event.target.formInputNameAttribute.value = ''; // clear input box
       UP_Collection_Access.insert({
         topic: newTopic,
-        votes: this.props.votes,
+        votes: 0,
       });
 
     };
