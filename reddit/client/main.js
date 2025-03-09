@@ -53,7 +53,7 @@ Meteor.startup(() =>  {
     let title = '441 reddit';
     let jsx = (
       <div>
-        <TitleBar />
+        <TitleBar title={title}/>
         <form onSubmit={processFormDataFunction}>
           <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
           <button>Add Topic</button>
