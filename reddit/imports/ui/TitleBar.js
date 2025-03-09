@@ -10,6 +10,14 @@ export default class TitleBar extends React.Component{ // jsx requires uppercase
       <div>
         {/*<h1>441 reddit</h1>*/}
         <h1>{this.props.title}</h1>
+        {/* Challenge
+          display a moderator for the 441 reddit page
+          it should be required and should be a string
+
+          in client/main.js
+          modify <TitleBar title={title}/>
+          in a manner necessary to have moderator's name show up under the title
+        */}
       </div>
     );
   }
@@ -18,7 +26,7 @@ export default class TitleBar extends React.Component{ // jsx requires uppercase
   // Google react type checking props
   // https://reactjs.org/docs/typechecking-with-proptypes.html
   // to use prop-types we need to update our npm
-  // meteor npm install --save prop-types
+  // meteor npm install prop-types --save
 };
 
 TitleBar.propTypes = {// this equals an object
