@@ -12,8 +12,15 @@ Meteor.startup(() =>  {
 
   // Tracker tracks queries and reruns code when queries change
   Tracker.autorun(() => {
-    const allPostsInDB = UP_Collection_Access.find().fetch();
-    let title = '441 reddit';
+    // let allPostsInDB = UP_Collection_Access.find().fetch();
+    // let allPostsInDB = UP_Collection_Access.find({votes: 3}).fetch();
+    // the previous returns all topics that have 3 votes
+    // change the votes to something else and they disappear
+
+    let allPostsInDB = UP_Collection_Access.find({/*emty so get all posts */},
+                                                  {sort: {votes: -1}}).fetch();
+    // the second argument {sort} is the options object
+        let title = '441 reddit';
 
     ReactDOM.render(<App
         passedPropTitle={title}
