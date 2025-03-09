@@ -20,7 +20,7 @@ export default class AddTopics extends React.Component{
   render(){
     return (
       <>
-        <form onSubmit={this.processFormData}>
+        <form onSubmit={this.processFormData.bind(this)}>
           <input type='text' name='formInputNameAttribute' placeholder='Topic Name'/>
           <button>Add Topic</button>
         </form>
