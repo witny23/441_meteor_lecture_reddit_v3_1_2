@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
   }
+
   html {
     font-size: 62.5%; // 62.5% of default vaule which is 16
                       // .625 * 16 = 10px which is our base font size
@@ -9,6 +10,7 @@
                       // when we use rem we are saying take the rem num and multiply by ten
                       // i.e., 1.2rem = 1.2*10 = 12px
   }
+  
   body {
     color: grey;
     font-family: Helvetica, Arial, sans-serif;
