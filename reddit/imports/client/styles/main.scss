@@ -1,5 +1,33 @@
-$blue: blue;
-
-* {
-    color: $blue;
-}
+* { // this is a reset of our margin and padding
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-size: 62.5%; // 62.5% of default vaule which is 16
+                      // .625 * 16 = 10px which is our base font size
+                      // basically saying that we want everything to be 10px
+                      // when we use rem we are saying take the rem num and multiply by ten
+                      // i.e., 1.2rem = 1.2*10 = 12px
+  }
+  body {
+    color: grey;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  h1 {  // this makes h1 a child of .title-bar
+    font-weight: 300;
+    font-size: 2.4rem;  // root em based off of font size of html
+                        // base html is 10px * 2.4 is 24 px header
+  }
+  
+  .title-bar {
+    background-color: grey;
+    color: blue;
+  }
+  
+  .wrapper {          // in charge of centering a container
+    margin: 0 auto;
+    max-width: 50rem; // 500px based off the unit sizing
+    padding: 1.3rem;  // 13px
+    background-color: lightgrey;
+  }
