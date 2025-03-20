@@ -6,8 +6,13 @@ export default class TopicList extends React.Component {
   renderAllPosts(){
     if (this.props.passed_posts.length === 0){
       return (
-        <div className='singleItemStyle'>
-          <p>Add a new topic to get started</p>
+        <div className = 'single-block-item-style'>
+          <p className = 'single-block-item-style__message'>
+              Add a new topic to get started
+          </p>
+          <p className = 'single-block-item-style__message single-block-item-style__message--empty'>
+              Empty mssg with modifier
+          </p>
         </div>
       );
     } else {
