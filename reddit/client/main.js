@@ -26,6 +26,7 @@ Meteor.startup(() =>  {
         passedPropTitle={title}
         passedPropModerator={'newman'}
         passedPropAllPosts={allPostsInDB}
+        passedFooter={'\u00A9 441 reddit'/* \u00A9 unicode sequence for copyright */}
       />, document.getElementById('content'));
 
   });

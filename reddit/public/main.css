@@ -35,3 +35,14 @@ h1 {
   margin-top: 0.5rem;
   padding: 1.3rem;
 }
+
+.footer {
+  color: white;
+}
+
+.footer-wrapper {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 1.3rem;
+  background-color: blue;
+}

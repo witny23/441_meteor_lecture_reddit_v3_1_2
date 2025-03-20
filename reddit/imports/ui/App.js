@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TitleBar from './TitleBar.js';
 import AddTopics from './AddTopics.js';
 import TopicList from './TopicList.js';
-import PropTypes from 'prop-types';
+import Footer from './Footer.js';
 
 export default class App extends React.Component {
   render() {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
           <AddTopics />
           <TopicList passed_posts={this.props.passedPropAllPosts}/>
         </div>
+        <Footer footerText={this.props.passedFooter} />
       </>
     )
   }
