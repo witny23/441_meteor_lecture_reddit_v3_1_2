@@ -1,10 +1,15 @@
 import {Meteor} from 'meteor/meteor';
 import {UP_Collection_Access} from './../imports/api/user_posts.js';
-
+/* challenge code ***********************************************************/
+import { Topic_Replies_Collection_Access } from './../imports/api/topic_replies.js';
 
 Meteor.publish("user_posts_collection", function() {
   return UP_Collection_Access.find();
 });
+Meteor.publish("topic_replies_collection", function() {
+  return Topic_Replies_Collection_Access.find();
+});
+
 
 Meteor.startup( () =>{
  
@@ -32,5 +37,6 @@ Meteor.startup( () =>{
 
   // Assign the allowAllOperations rules to both collections.
   UP_Collection_Access.allow(allowAllOperations);
+  Topic_Replies_Collection_Access.allow(allowAllOperations);
 });
 

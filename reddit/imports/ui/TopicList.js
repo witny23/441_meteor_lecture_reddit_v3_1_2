@@ -2,6 +2,9 @@ import React from 'react';
 import RenderPost from './RenderPost.js';
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
+/* challenge code ***********************************************************/
+import {Topic_Replies_Collection_Access, Calculate_rank}
+                        from './../api/topic_replies.js';
 
 export default class TopicList extends React.Component {
   renderAllPosts(){
@@ -15,7 +18,17 @@ export default class TopicList extends React.Component {
       );
     } else {
       return this.props.passed_posts.map((post) => {
-        return <RenderPost key={post._id} post_prop_obj={post}/>
+/* challenge code ***********************************************************/
+// use post._id for each topic to serch the replies collection
+        let Single_Topic_Replies =
+            Topic_Replies_Collection_Access.find({post_id: post._id},
+                                      {sort: {total_reply_votes: -1}}).fetch();
+        // position the replies so their place can be used for different backgrounds
+        let positioned_replies = Calculate_rank(Single_Topic_Replies);
+        // pass the array of replies to the RenderPost.js along
+        // with the original post obj
+        return <RenderPost key={post._id} post_prop_obj={post}
+                           reply_prop_array={positioned_replies}/>
       });
     }
 

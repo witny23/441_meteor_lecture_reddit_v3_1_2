@@ -11,7 +11,11 @@ export default class AddTopics extends React.Component{
       event.target.formInputNameAttribute.value = '';
       UP_Collection_Access.insert({
         topic: newTopic,
-        votes: 0,
+/* challenge code ***********************************************************/        
+        up_votes: 0,  // decided to track up votes and down votes
+        down_votes: 0,
+        date_added: new Date(), //https://docs.mongodb.com/manual/reference/method/Date/
+
       });
 
     };
