@@ -1,11 +1,11 @@
 {
   "name": "reddit",
   "private": true,
-"scripts": {
-  "prestart": "npm run build:css",
-  "start": "meteor run",
-  "build:css": "sass imports/client/styles/main.scss:public/main.css --no-source-map",
-  "watch:css": "sass --watch imports/client/styles/main.scss:public/main.css --no-source-map"
+  "scripts": {
+    "prestart": "npm run build:css",
+    "start": "meteor run",
+    "build:css": "sass imports/client/styles/main.scss:public/main.css --no-source-map",
+    "watch:css": "sass --watch imports/client/styles/main.scss:public/main.css --no-source-map"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
@@ -13,7 +13,8 @@
     "meteor-node-stubs": "^1.2.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-flip-move": "^3.0.5"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

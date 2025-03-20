@@ -1,6 +1,7 @@
 import React from 'react';
 import RenderPost from './RenderPost.js';
 import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
 
 export default class TopicList extends React.Component {
   renderAllPosts(){
@@ -22,7 +23,15 @@ export default class TopicList extends React.Component {
   render(){
     return (
       <>
-        {this.renderAllPosts()}
+        {/*this.renderAllPosts()*/}
+        {/*<FlipMove>*/}
+        <FlipMove delay={500 /* this is in milliseconds */}
+                  leaveAnimation='accordionVertical'
+                  maintainContainerHeight={true} /*stops the footer from
+                                                  hopping on top of the last
+                                                  topic when it is removed*/ >
+          {this.renderAllPosts()}
+        </FlipMove>
       </>
     )
   }
