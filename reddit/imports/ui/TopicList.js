@@ -10,9 +10,6 @@ export default class TopicList extends React.Component {
           <p className = 'single-block-item-style__message'>
               Add a new topic to get started
           </p>
-          <p className = 'single-block-item-style__message single-block-item-style__message--empty'>
-              Empty mssg with modifier
-          </p>
         </div>
       );
     } else {
