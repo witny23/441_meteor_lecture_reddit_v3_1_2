@@ -11,8 +11,11 @@ export default class App extends React.Component {
         <TitleBar
           title={this.props.passedPropTitle}
           moderator={this.props.passedPropModerator}/>
-        <AddTopics />
-        <TopicList passed_posts={this.props.passedPropAllPosts}/>
+       {/* wrap AddTopic and TopicList with a div that utilizes the wrapper class */}
+        <div className='wrapper'>
+          <AddTopics />
+          <TopicList passed_posts={this.props.passedPropAllPosts}/>
+        </div>
       </>
     )
   }

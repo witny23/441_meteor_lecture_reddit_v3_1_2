@@ -8,7 +8,8 @@ html {
 }
 
 body {
-  color: grey;
+  background-color: grey;
+  font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -18,7 +19,6 @@ h1 {
 }
 
 .title-bar {
-  background-color: grey;
   color: blue;
 }
 
@@ -27,4 +27,11 @@ h1 {
   max-width: 50rem;
   padding: 1.3rem;
   background-color: lightgrey;
+}
+
+.singleItemStyle {
+  background-color: white;
+  border: 2px black solid;
+  margin-top: 0.5rem;
+  padding: 1.3rem;
 }
