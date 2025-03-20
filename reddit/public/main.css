@@ -45,6 +45,18 @@ input, button, select {
   padding: 1.3rem;
 }
 
+.single-block-item-style--position-1 {
+  background-color: rgb(255, 232.8571428571, 224);
+}
+
+.single-block-item-style--position-2 {
+  background-color: rgb(231.6261682243, 243.8831775701, 247.8738317757);
+}
+
+.single-block-item-style--position-3 {
+  background-color: rgb(232.453125, 251.546875, 232.453125);
+}
+
 .single-block-item-style__message {
   color: seagreen;
   font-size: 1.3rem;

@@ -1,0 +1,13 @@
+@use "sass:color"; // Import the color module
+
+// variables
+// $salmon: lightsalmon;
+// $blue: lightblue;
+// $green: lightgreen;
+
+// let's lighten those colors even further
+// https://sass-lang.com/documentation/modules/color#adjust
+// https://www.w3schools.com/sass/sass_functions_color.php
+$salmon: color.adjust(lightsalmon, $lightness: 20%);
+$blue: color.adjust(lightblue, $lightness: 15%);
+$green: color.adjust(lightgreen, $lightness: 20%);

@@ -1,3 +1,5 @@
+@use '../base/_variables.scss' as vars; // need access to the variables and name them vars
+
 // BEM - block, element, modifier
 // block - the core building block for a website. Look at this app in a browser
     // and you will see a bunch of blocks. Put the blocks together and you have a web app
@@ -18,6 +20,26 @@
     border: 2px black solid;
     margin-top: .5rem;
     padding: 1.3rem;
+  }
+  
+  // challenge
+  //  add three selectors for the three modifiers single-block-item-style--position-[1,2,3]
+  //  set a different background-color for those three - salmon, blue, green
+
+
+  
+  .single-block-item-style--position-1 {
+    // background-color: lightsalmon;
+    // $salmon from _variables.scss
+    background-color: vars.$salmon;       // dot notations vars. used to access $salmon
+  }
+  .single-block-item-style--position-2 {
+  // background-color: blue;
+    background-color: vars.$blue;
+  }
+  .single-block-item-style--position-3 {
+    // background-color: green;
+    background-color: vars.$green;
   }
   
   .single-block-item-style__message {
