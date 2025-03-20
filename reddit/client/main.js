@@ -2,7 +2,9 @@ import React from 'react'; // specify the module and then specify the library na
                             // meteor takes care of the rest
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor'; // named export from Meteor
-import {UP_Collection_Access} from './../imports/api/user_posts.js';
+// import {UP_Collection_Access} from './../imports/api/user_posts.js';
+import {UP_Collection_Access, Calculate_rank_and_position_for_posts}
+        from './../imports/api/user_posts.js';
 import App from './../imports/ui/App.js';
 
 Meteor.subscribe("user_posts_collection");
@@ -20,12 +22,14 @@ Meteor.startup(() =>  {
     let allPostsInDB = UP_Collection_Access.find({/*emty so get all posts */},
                                                   {sort: {votes: -1}}).fetch();
     // the second argument {sort} is the options object
-        let title = '441 reddit';
+    let title = '441 reddit';
+    let positioned_posts = Calculate_rank_and_position_for_posts(allPostsInDB);
 
     ReactDOM.render(<App
         passedPropTitle={title}
         passedPropModerator={'newman'}
-        passedPropAllPosts={allPostsInDB}
+        // passedPropAllPosts={allPostsInDB}
+        passedPropAllPosts={positioned_posts}
         passedFooter={'\u00A9 441 reddit'/* \u00A9 unicode sequence for copyright */}
       />, document.getElementById('content'));
 
