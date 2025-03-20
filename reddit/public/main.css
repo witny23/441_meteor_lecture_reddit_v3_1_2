@@ -18,6 +18,10 @@ h1 {
   font-size: 2.4rem;
 }
 
+input, button, select {
+  font-size: 1.4rem;
+}
+
 .title-bar {
   color: blue;
 }
@@ -34,7 +38,7 @@ h1 {
   background-color: lightgrey;
 }
 
-.singleItemStyle, .single-block-item-style {
+.single-block-item-style {
   background-color: white;
   border: 2px black solid;
   margin-top: 0.5rem;
@@ -85,4 +89,34 @@ h1 {
   border-radius: 50%;
   height: 4rem;
   width: 4rem;
+}
+
+.form {
+  display: flex;
+}
+
+.form__input {
+  border: 1px solid grey;
+  padding: 1.3rem;
+  flex-grow: 1;
+}
+
+.post {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__topic {
+  font-weight: 300;
+  font-size: 1.9rem;
+}
+
+.post__stats {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.post__actions {
+  flex-shrink: 0;
 }

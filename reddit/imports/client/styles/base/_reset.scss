@@ -11,14 +11,3 @@
                       // i.e., 1.2rem = 1.2*10 = 12px
   }
   
-  body {
-    background-color: grey;
-    font-size: 1.6rem;
-    font-family: Helvetica, Arial, sans-serif;
-  }
-  
-  h1 {  // this makes h1 a child of .title-bar
-    font-weight: 300;
-    font-size: 2.4rem;  // root em based off of font size of html
-                        // base html is 10px * 2.4 is 24 px header
-  }
